@@ -25,7 +25,7 @@ class SendReminders extends Job
      */
     public function handle()
     {
-        $peerIds = [''];
+        $peerIds = [2000000002];
 
         foreach ($peerIds as $peerId) {
             Carbon::setLocale('ru');
