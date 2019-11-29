@@ -84,6 +84,8 @@ $app->routeMiddleware([
 // $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 
+$app->register(Lorisleiva\LaravelDeployer\LaravelDeployerServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
