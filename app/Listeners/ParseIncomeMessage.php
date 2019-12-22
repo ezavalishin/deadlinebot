@@ -2,14 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\ExampleEvent;
 use App\Events\GotNewMessage;
 use App\Services\OutgoingMessage;
 use App\Services\VkClient;
 use Carbon\Carbon;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Str;
 
 class ParseIncomeMessage
 {
@@ -35,18 +31,18 @@ class ParseIncomeMessage
 
         $text = $incomeMessage->getText();
 
-        if (Str::contains(mb_strtolower($text), '!deadline')) {
+//        if (Str::contains(mb_strtolower($text), '!deadline')) {
 
-            Carbon::setLocale('ru');
-            $edgeDate = Carbon::parse('2019-12-21 23:59:59', 'Europe/Moscow');
+        Carbon::setLocale('ru');
+        $edgeDate = Carbon::parse('2019-12-26 23:59:59', 'Europe/Moscow');
 
-            $message = "Приём заявок закроется "  . $edgeDate->fromNow(null, false, 4);
+        $message = 'Подведение итогов ' . $edgeDate->fromNow(null, false, 4);
 
 
-            $outgoingMessage = new OutgoingMessage($message);
-            $outgoingMessage->setPeerId($incomeMessage->getPeerId());
+        $outgoingMessage = new OutgoingMessage($message);
+        $outgoingMessage->setPeerId($incomeMessage->getPeerId());
 
-            (new VkClient())->sendMessage($outgoingMessage);
-        }
+        (new VkClient())->sendMessage($outgoingMessage);
+//        }
     }
 }
